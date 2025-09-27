@@ -9,38 +9,31 @@ app.secret_key = "modi_secret_key"
 activities = {
     "1": {
         "title": "🚕 الذهاب للعمل",
-        "description": "سيارة ذاتية القيادة اختارت لك الطريق الأسرع،"
-                       " وتجنبت الزحام باستخدام الذكاء الاصطناعي.",
+        "description": "سيارة ذاتية القيادة اختارت لك الطريق الأسرع، وتجنبت الزحام باستخدام الذكاء الاصطناعي.",
         "points": 10,
         "image": "work.jpg"
     },
-
     "2": {
         "title": "🩺 زيارة المستشفى",
-        "description": "حجزت موعدك عبر تطبيق صحي،"
-                       " وتم تشخيصك باستخدام نظام ذكي يعتمد على بياناتك الحيوية،"
-                       " سلامتك ماتشوفين شر ❤️.",
+        "description": "حجزت موعدك عبر تطبيق صحي، وتم تشخيصك باستخدام نظام ذكي يعتمد على بياناتك الحيوية، سلامتك ماتشوفين شر ❤️.",
         "points": 8,
         "image": "hos.jpg"
     },
     "3": {
         "title": "🛒 التسوق الذكي",
-        "description": "دخلت متجر بدون كاشير، والدفع تم تلقائيًا عبر التعرف على الوجه وتقنية NFC،"
-                       " تسوق ممتع يا ملكة 🫶.",
+        "description": "دخلت متجر بدون كاشير، والدفع تم تلقائيًا عبر التعرف على الوجه وتقنية NFC، تسوق ممتع يا ملكة 🫶.",
         "points": 7,
         "image": "shop.jpg"
     },
     "4": {
         "title": "🎨 نشاط ترفيهي",
-        "description": "حضرت فعالية فنية مقترحة حسب اهتماماتك،"
-                       " وحجزت تذكرتك عبر تطبيق ترفيهي ذكي.",
+        "description": "حضرت فعالية فنية مقترحة حسب اهتماماتك، وحجزت تذكرتك عبر تطبيق ترفيهي ذكي.",
         "points": 6,
         "image": "entr.jpg"
     },
     "5": {
         "title": "📚 التعليم الذكي",
-        "description": "شاركت في دورة تدريبية عبر منصة تعليمية تعتمد على الذكاء الاصطناعي لتخصيص المحتوى، "
-                       "بالتوفيق يا بطلة ✨.",
+        "description": "شاركت في دورة تدريبية عبر منصة تعليمية تعتمد على الذكاء الاصطناعي لتخصيص المحتوى، بالتوفيق يا بطلة ✨.",
         "points": 9,
         "image": "edec.jpg"
     }
@@ -55,7 +48,6 @@ def update_leaderboard(name, points):
     else:
         data = {}
 
-    # جمع النقاط وليس استبدالها
     data[name] = data.get(name, 0) + points
 
     with open(path, "w", encoding="utf-8") as f:
@@ -68,12 +60,12 @@ def welcome():
         name = request.form.get("username")
         session["username"] = name
         session["points"] = 0
-        return redirect(url_for("home"))
+        return redirect(url_for("main_home"))
     return render_template("welcome.html")
 
 # ✅ الصفحة الرئيسية
 @app.route("/home")
-def home():
+def main_home():
     username = session.get("username", "زائر")
     return render_template("index.html", username=username)
 
@@ -133,6 +125,8 @@ def leaderboard():
     else:
         sorted_users = []
     return render_template("leaderboard.html", users=sorted_users)
+
+# ✅ تصفير لوحة الشرف
 @app.route("/تصفير_لوحة_الشرف")
 def reset_leaderboard():
     path = "leaderboard.json"
@@ -143,7 +137,6 @@ def reset_leaderboard():
     else:
         return "<h2>⚠️ ملف لوحة الشرف غير موجود</h2>"
 
-
-# ✅ تشغيل التطبيق
+# ✅ تشغيل التطبيق محليًا (Render يستخدم gunicorn)
 if __name__ == "__main__":
     app.run(debug=True)
