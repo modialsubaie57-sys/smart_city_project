@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>نهاية اليوم</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="activity-box">
+    <h1>🎉 أحسنت يا {{ username }}!</h1>
+    <p>جمعت <strong>{{ points }}</strong> نقطة ذكية اليوم.</p>
+    <p>🎖️ ترتيبك بين المشاركين: المركز <strong>{{ rank }}</strong></p>
+    <a href="/لوحة_الشرف" class="start-button">🏆 عرض لوحة الشرف</a>
+    <a href="/" class="start-button">🔄 إعادة اليوم</a>
+  </div>
+</body>
+</html>

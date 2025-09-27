@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  direction: rtl;
+  color: white;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  overflow: hidden;
+  position: relative;
+}
+
+/* خلفية متحركة */
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
+  animation: pulse 6s infinite ease-in-out;
+  z-index: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.05); opacity: 0.3; }
+}
+
+/* صندوق الترحيب */
+.welcome-box {
+  position: relative;
+  z-index: 1;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 50px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 0 30px rgba(255,255,255,0.2);
+  animation: fadeInBox 1.5s ease forwards;
+}
+
+@keyframes fadeInBox {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* العنوان */
+.fade-in {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #00e0ff;
+  animation: fadeInText 2s ease forwards;
+}
+
+@keyframes fadeInText {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* الوصف */
+.slide-up {
+  font-size: 18px;
+  margin-bottom: 25px;
+  animation: slideUp 2s ease forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* النموذج */
+.form-animate input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  width: 80%;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.form-animate input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #00e0ff;
+}
+
+.form-animate button {
+  padding: 14px 28px;
+  font-size: 18px;
+  background: linear-gradient(to top, #00bfa5, #009e8a);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  animation: pulseButton 2s infinite;
+  transition: transform 0.3s ease;
+}
+
+.form-animate button:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pulseButton {
+  0%, 100% { box-shadow: 0 0 10px rgba(0,191,165,0.4); }
+  50% { box-shadow: 0 0 20px rgba(0,191,165,0.8); }
+}
+

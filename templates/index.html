@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>أنشطتك يا {{ username }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <!-- ✅ شريط التنقل -->
+  <div class="top-buttons">
+  <a href="/تقرير" class="top-button" onclick="playClick()">
+    📊 <span>عرض التقرير</span>
+  </a>
+  <a href="/نهاية" class="top-button" onclick="playClick()">
+    🔚 <span>إنهاء اليوم</span>
+  </a>
+</div>
+
+
+  <!-- ✅ صندوق الأنشطة -->
+  <div class="activity-box">
+    <h1>🌟 مرحبًا {{ username }}!</h1>
+    <p>اختر نشاطك الذكي لبداية يومك:</p>
+
+    <div class="activity-row">
+      <a href="/نشاط/1" class="activity-card" onclick="showStars(event)">💼 <span>الذهاب للعمل</span></a>
+      <a href="/نشاط/2" class="activity-card" onclick="showStars(event)">🏥 <span>زيارة المستشفى</span></a>
+      <a href="/نشاط/3" class="activity-card" onclick="showStars(event)">🛒 <span>التسوق </span></a>
+      <a href="/نشاط/4" class="activity-card" onclick="showStars(event)">🎁 <span> نشاط ترفيهي</span></a>
+      <a href="/نشاط/5" class="activity-card" onclick="showStars(event)">📚 <span>التعليم الذكي</span></a>
+    </div>
+  </div>
+
+  <!-- ✅ صوت النقر -->
+  <audio id="clickSound" src="{{ url_for('static', filename='click.mp3') }}"></audio>
+
+  <!-- ✅ كود النجوم والصوت -->
+  <script>
+    function playClick() {
+      document.getElementById('clickSound').play();
+    }
+
+    function showStars(e) {
+      e.preventDefault();
+      playClick();
+      const target = e.currentTarget;
+      const rect = target.getBoundingClientRect();
+
+      for (let i = 0; i < 10; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.textContent = '⭐';
+
+        star.style.left = `${rect.left + rect.width / 2}px`;
+        star.style.top = `${rect.top + rect.height / 2}px`;
+        star.style.setProperty('--x', `${(Math.random() - 0.5) * 200}px`);
+        star.style.setProperty('--y', `${(Math.random() - 0.5) * 200}px`);
+
+        document.body.appendChild(star);
+        setTimeout(() => star.remove(), 800);
+      }
+
+      setTimeout(() => {
+        window.location.href = target.href;
+      }, 300);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>📋 تقرير يومك يا {{ username }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      direction: rtl;
+      color: white;
+      background: linear-gradient(to bottom, #002f4b, #005f6b);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .report-box {
+      background-color: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 20px;
+      margin: 30px auto;
+      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .nav-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #00e0ff;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 14px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      margin-top: 30px;
+    }
+
+    .nav-button:hover {
+      background-color: #00bcd4;
+      transform: scale(1.05);
+    }
+
+    .leaderboard {
+      margin-top: 40px;
+      text-align: right;
+    }
+
+    .leaderboard h2 {
+      margin-bottom: 10px;
+    }
+
+    .leaderboard ol {
+      padding: 0;
+      list-style: none;
+    }
+
+    .leaderboard li {
+      background-color: rgba(255,255,255,0.1);
+      padding: 10px 20px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .badge {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="report-box">
+    <h1>📋 تقرير يومك يا {{ username }}</h1>
+    <p>جمعت خلال اليوم <strong>{{ points }}</strong> نقطة ذكية! 👏</p>
+
+    <div class="leaderboard">
+      <h2>🏆 لوحة الشرف</h2>
+      <p>🎖️ ترتيبك بين المشاركين: المركز <strong>{{ rank }}</strong></p>
+      <ol>
+        {% for user, score in users %}
+          <li>
+            <span>{{ loop.index }}. {{ user }} — {{ score }} نقطة</span>
+            <span class="badge">
+              {% if loop.index == 1 %}
+                👑 ملكة المدينة
+              {% elif loop.index <= 3 %}
+                🏅 نجمة ذكية
+              {% else %}
+                ⭐ مشاركة نشيطة
+              {% endif %}
+            </span>
+          </li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <a href="/نهاية" class="nav-button" onclick="playClick()">🔚 <span>إنهاء اليوم</span></a>
+  </div>
+
+  <audio id="clickSound" src="{{ url_for('static', filename='click.mp3') }}"></audio>
+  <script>
+    function playClick() {
+      document.getElementById('clickSound').play();
+    }
+  </script>
+</body>
+</html>
+

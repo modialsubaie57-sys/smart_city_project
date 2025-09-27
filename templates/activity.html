@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ activity.title }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="activity-box">
+    <h1>{{ activity.title }}</h1>
+    <p>{{ activity.description }}</p>
+    <p>✨ هذا النشاط يمنحك <strong>{{ activity.points }}</strong> نقطة</p>
+
+    <!-- ✅ صورة النشاط -->
+    <div class="activity-image">
+      <img src="{{ url_for('static', filename=activity.image) }}" alt="صورة النشاط" />
+    </div>
+
+    <!-- ✅ زر العودة للأنشطة -->
+    <a href="/home" class="return-button" onclick="playClick()">🔙 العودة للأنشطة</a>
+  </div>
+
+  <!-- ✅ صوت النقر -->
+  <audio id="clickSound" src="{{ url_for('static', filename='click.mp3') }}"></audio>
+  <script>
+    function playClick() {
+      document.getElementById('clickSound').play();
+    }
+  </script>
+</body>
+</html>
+

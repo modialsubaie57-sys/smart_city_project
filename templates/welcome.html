@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>مرحبًا بك</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='welcome.css') }}">
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="welcome-box">
+    <h1 class="fade-in">👋 أهلًا بك في المدينة الذكية!</h1>
+    <p class="slide-up">اكتب اسمك وابدأ رحلتك التقنية والإبداعية الآن ✨</p>
+    <form method="POST" class="form-animate">
+      <input type="text" name="username" placeholder="اكتب اسمك هنا" required>
+      <button type="submit">🚀 ابدأ الرحلة</button>
+    </form>
+  </div>
+</body>
+</html>

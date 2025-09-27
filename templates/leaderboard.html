@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة الشرف</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .badge {
+      font-size: 20px;
+      margin-left: 10px;
+    }
+    ol {
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      background-color: rgba(255,255,255,0.1);
+      padding: 12px 20px;
+      margin-bottom: 10px;
+      border-radius: 12px;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeInUp 0.5s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="activity-box fade-in-up">
+    <h1>🏆 لوحة الشرف</h1>
+    <ol>
+      {% for user, score in users %}
+        <li>
+          <span>{{ loop.index }}. {{ user }} — {{ score }} نقطة</span>
+          <span class="badge">
+            {% if loop.index == 1 %}
+              👑 ملكةالمدينة
+            {% elif loop.index <= 3 %}
+              🏅  نجمة ذكية
+            {% else %}
+              ⭐ مشاركة نشيطة
+            {% endif %}
+          </span>
+        </li>
+      {% endfor %}
+    </ol>
+    <a href="/" class="nav-button" onclick="playClick()">🏠 <span>العودة للترحيب</span></a>
+  </div>
+
+  <audio id="clickSound" src="{{ url_for('static', filename='click.mp3') }}"></audio>
+  <script>
+    function playClick() {
+      document.getElementById('clickSound').play();
+    }
+  </script>
+</body>
+</html>
+
